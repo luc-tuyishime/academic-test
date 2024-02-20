@@ -1,0 +1,23 @@
+{
+    "root": true,
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+        "parser": "@typescript-eslint/parser"
+    },
+    "extends": ["plugin:vue/strongly-recommended", "eslint:recommended", "@vue/typescript/recommended", "prettier", "eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
+    "plugins": ["@typescript-eslint", "prettier"],
+    "rules": {
+        "prettier/prettier": "error",
+        "no-tabs": "off",
+        "vue/no-v-model-argument": "off",
+        "no-undef": "off",
+
+        // not needed for vue 3
+        "vue/no-multiple-template-root": "off",
+        "vue/multi-word-component-names": 0,
+        "vue/no-v-html": 0,
+        "vue/no-useless-v-bind": 0,
+        "vue/no-useless-v-bind-sync": 0,
+        "vue/no-v-for-template-key-on-child": 0
+    }
+}
