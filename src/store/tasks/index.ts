@@ -5,7 +5,7 @@ import { API } from "../../services"
 import { AxiosError } from "axios"
 import { Task, InputCreateTask, InputUpdateTask } from "../../services/tasks/types"
 
-export const useSchoolStore = defineStore("taskStore", () => {
+export const useTaskStore = defineStore("taskStore", () => {
   const tasks = ref<Task[]>([])
 
   function initTasks(data: Task[]) {
@@ -25,11 +25,12 @@ export const useSchoolStore = defineStore("taskStore", () => {
   async function dispatchGetTasks(): Promise<APIResponse<null>> {
     try {
       const { status, data } = await API.tasks.getTasks()
+
       if (status === 200) {
-        initTasks(data.content)
+        initTasks(data?.todos)
         return {
           success: true,
-          content: null,
+          todos: null,
         }
       }
     } catch (error) {
@@ -37,12 +38,12 @@ export const useSchoolStore = defineStore("taskStore", () => {
       return {
         success: false,
         status: _error.response?.status,
-        content: null,
+        todos: null,
       }
     }
     return {
       success: false,
-      content: null,
+      todos: null,
       status: 400,
     }
   }
@@ -51,10 +52,10 @@ export const useSchoolStore = defineStore("taskStore", () => {
     try {
       const { status, data } = await API.tasks.createTask(input)
       if (status === 200) {
-        addNewTask(data.content)
+        addNewTask(data.todos)
         return {
           success: true,
-          content: null,
+          todos: null,
         }
       }
     } catch (error) {
@@ -62,12 +63,12 @@ export const useSchoolStore = defineStore("taskStore", () => {
       return {
         success: false,
         status: _error.response?.status,
-        content: null,
+        todos: null,
       }
     }
     return {
       success: false,
-      content: null,
+      todos: null,
       status: 400,
     }
   }
@@ -79,7 +80,7 @@ export const useSchoolStore = defineStore("taskStore", () => {
         removeTask(id)
         return {
           success: true,
-          content: null,
+          todos: null,
         }
       }
     } catch (error) {
@@ -87,12 +88,12 @@ export const useSchoolStore = defineStore("taskStore", () => {
       return {
         success: false,
         status: _error.response?.status,
-        content: null,
+        todos: null,
       }
     }
     return {
       success: false,
-      content: null,
+      todos: null,
       status: 400,
     }
   }
@@ -103,7 +104,7 @@ export const useSchoolStore = defineStore("taskStore", () => {
       if (status === 200) {
         return {
           success: true,
-          content: null,
+          todos: null,
         }
       }
     } catch (error) {
@@ -111,12 +112,12 @@ export const useSchoolStore = defineStore("taskStore", () => {
       return {
         success: false,
         status: _error.response?.status,
-        content: null,
+        todos: null,
       }
     }
     return {
       success: false,
-      content: null,
+      todos: null,
       status: 400,
     }
   }
