@@ -9,9 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@preline/overlay": "^2.0.2",
     "ant-design-vue": "^4.1.2",
     "axios": "^1.6.7",
     "pinia": "^2.1.7",
+    "preline": "^2.0.3",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
   },
