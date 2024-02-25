@@ -9,23 +9,42 @@ on:
   pull_request:
     branches: [ "master" ]
 
-jobs:
-  build:
-
+jobs: 
+  unit-test:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+         path: ~/.npm
+         key: npm-${{ hashFiles('package-lock.json') }}
+         restore-keys: npm-
+      - name: Prep NPM dependencies
+        run: npm install -f
+      
+      - name: Test NPM test
+        run: npm run test
+
+      - name: Test NPM test
+        run: |
+          npm install -f
+          npm run test:unit:coverage:ci
+
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2.0.8
+        with:
+          skip-step: all
+          coverage-file: ./test/unit/coverage/report.json
+          base-coverage-file: ./test/unit/coverage/report.json
