@@ -4,7 +4,7 @@
   <div class="flex justify-end p-2">
     <button
       type="button"
-      class="p-2 burger-icon inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-white dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+      class="p-2 burger-icon inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-500 dark:bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-white dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
       data-hs-overlay="#sidebar-mini"
       aria-controls="sidebar-mini"
       aria-label="Toggle navigation"
