@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "test:unit:coverage:ci": "vue-cli-service test --coverage --json --testLocationInResults --outputFile=test/unit/coverage/report.json"
   },
   "dependencies": {
     "@cypress/vue": "^3.1.0",
