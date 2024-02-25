@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DarkModeButton Test button properly  1`] = `
+<button
+  class="px-4 py-2 text-white bg-blue-900 rounded dark:bg-red-400"
+>
+  Dark Mode
+</button>
+`;
