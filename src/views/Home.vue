@@ -37,7 +37,7 @@
           </div>
         </div>
         <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-          <div v-for="(task, index) in taskStore?.tasks" :key="index">
+          <div v-for="(task, index) in taskStore?.tasks" :key="index" v-memo="[task]">
             <Card :todo="task?.todo" :completed="task?.completed" :id="task?.id" :task="task" />
           </div>
         </div>
