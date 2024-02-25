@@ -3,7 +3,7 @@ import { APIResponse } from "../types"
 import { Task, InputCreateTask, InputUpdateTask } from "./types"
 
 async function getTasks() {
-  return await http.get<APIResponse<Task[]>>("todos")
+  return await http.get<APIResponse<Task[]>>("todos?limit=15")
 }
 
 async function getTask(id: number) {
