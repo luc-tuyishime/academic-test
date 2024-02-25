@@ -1,0 +1,20 @@
+{
+  "Todos": "Todos",
+  "Completed": "Completed",
+  "Boards": "Boards",
+  "To do": "To do",
+  "Add Todo": "Add Todo",
+  "Status": "Status",
+  "Create a Todo": "Create a Todo",
+  "Please select a status": "Please select a status",
+  "In progress": "In progress",
+  "Update task": "Update task",
+  "Loading": "Loading",
+  "Task Created successfully": "Task Created successfully",
+  "Updated successfully": "Updated successfully",
+  "Ups, something happened": "Ups, something happened",
+  "Task Deleted successfully": "Task Deleted successfully",
+  "Creating": "Creating",
+  "Create": "Create",
+  "Deleting": "Deleting"
+}

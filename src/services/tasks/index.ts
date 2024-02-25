@@ -6,12 +6,16 @@ async function getTasks() {
   return await http.get<APIResponse<Task[]>>("todos")
 }
 
+async function getTask(id: number) {
+  return await http.get<APIResponse<Task[]>>(`todos/${id}`)
+}
+
 async function deleteTask(id: number) {
   return await http.delete<APIResponse<boolean>>(`todos/${id}`)
 }
 
 async function createTask(input: InputCreateTask) {
-  return await http.post<APIResponse<Task>>("todos", input)
+  return await http.post<APIResponse<Task>>("todos/add", input)
 }
 
 async function updateTask(input: InputUpdateTask, id: number) {
@@ -20,6 +24,7 @@ async function updateTask(input: InputUpdateTask, id: number) {
 
 export default {
   getTasks,
+  getTask,
   createTask,
   updateTask,
   deleteTask,
