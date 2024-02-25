@@ -3,12 +3,13 @@
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
+    "allowJs": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     "types": ["vue3-toastify/global", "node"],
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -22,6 +23,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/test/__tests__/components/Sidebar.spec.tsts.tsts"],
+  "exclude": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/test/__tests__/components/Sidebar.spec.tsts.tsts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

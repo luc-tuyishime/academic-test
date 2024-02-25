@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="grid grid-cols-12 grid-rows-2">
     <div class="col-span-1" />
@@ -30,7 +28,7 @@
                 </div>
 
                 <div class="mt-6 flex items-center justify-start gap-x-6">
-                  <button @click="handleSubmit" :disabled="taskStore.loading.status" type="submit" class="rounded-md btn-update bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  <button @click="handleSubmit" :disabled="isDisabled" type="submit" class="rounded-md btn-update bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     <div v-if="taskStore.loading.status" class="text-center">
                       <div role="status">
                         <svg aria-hidden="true" class="inline w-6 h-6 text-gray-200 animate-spin dark:text-white-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -95,47 +93,64 @@
   }
 }
 </style>
-<script setup>
-import { ref } from "vue"
+<script lang="ts">
+import { ref, defineComponent, computed } from "vue"
 import { useI18n } from "vue-i18n"
 import { toast } from "vue3-toastify"
 import { useTaskStore } from "../store/tasks"
 import "vue3-toastify/dist/index.css"
 
-const i18n = useI18n()
-const todo = ref("")
-const completed = ref("")
-const taskStore = useTaskStore()
+export default defineComponent({
+  setup() {
+    const i18n = useI18n()
+    const todo = ref("")
+    const completed = ref("")
+    const taskStore = useTaskStore()
 
-const generateRandomId = () => {
-  return Math.floor(Math.random() * 30) + 1
-}
-
-const changeStatus = (e) => {
-  completed.value = e.target.value
-}
-
-const handleSubmit = async (e) => {
-  e.preventDefault()
-
-  const data = {
-    todo: todo.value,
-    completed: Boolean(completed.value),
-    userId: generateRandomId(),
-  }
-  const { success } = await taskStore.dispatchCreateTask(data)
-
-  if (!success) {
-    alert(i18n.t("Ups, something happened"))
-  }
-
-  if (success) {
-    toast(i18n.t("Task Created successfully"), {
-      autoClose: 1000,
+    const isDisabled = computed(() => {
+      return todo.value.trim() === "" && completed.value.trim() === ""
     })
 
-    todo.value = ""
-    completed.value = ""
-  }
-}
+    const generateRandomId = () => {
+      return Math.floor(Math.random() * 30) + 1
+    }
+
+    const changeStatus = (e: Event) => {
+      completed.value = (e.target as HTMLInputElement).value
+    }
+
+    const handleSubmit = async (e: Event) => {
+      e.preventDefault()
+
+      const data = {
+        todo: todo.value,
+        completed: Boolean(completed.value),
+        userId: generateRandomId(),
+      }
+      const { success } = await taskStore.dispatchCreateTask(data)
+
+      if (!success) {
+        alert(i18n.t("Ups, something happened"))
+      }
+
+      if (success) {
+        toast(i18n.t("Task Created successfully"), {
+          autoClose: 1000,
+        })
+
+        todo.value = ""
+        completed.value = ""
+      }
+    }
+
+    return {
+      changeStatus,
+      handleSubmit,
+      taskStore,
+      todo,
+      completed,
+      isDisabled,
+    }
+  },
+})
 </script>

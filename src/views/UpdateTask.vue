@@ -1,5 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
   <div class="grid grid-cols-12 grid-rows-2">
     <div class="col-span-1" />
@@ -90,45 +88,55 @@
   }
 }
 </style>
-<script setup>
+<script lang="ts">
 import { useRoute } from "vue-router"
 import { useI18n } from "vue-i18n"
 import { toast } from "vue3-toastify"
 import "vue3-toastify/dist/index.css"
-import { onMounted, ref } from "vue"
+import { onMounted, ref, defineComponent } from "vue"
 import { useTaskStore } from "../store/tasks"
 
-const i18n = useI18n()
-const taskStore = useTaskStore()
-const newValue = ref("")
+export default defineComponent({
+  setup() {
+    const i18n = useI18n()
+    const taskStore = useTaskStore()
+    const newValue = ref("")
 
-const route = useRoute()
-const param = ref(route?.params.id)
+    const route = useRoute()
+    const param = ref(route?.params.id)
 
-const changeStatus = (e) => {
-  newValue.value = e.target.value
-}
+    const changeStatus = (e: Event) => {
+      newValue.value = (e.target as HTMLInputElement).value
+    }
 
-onMounted(async () => {
-  const { success } = await taskStore.dispatchGetTask(param.value)
+    onMounted(async () => {
+      const { success } = await taskStore.dispatchGetTask(Number(param.value))
 
-  if (!success) {
-    alert(i18n.t("Ups, something happened"))
-  }
-})
-
-const handleSubmit = async (e) => {
-  e.preventDefault()
-  const { success } = await taskStore.dispatchUpdateTask(Boolean(newValue.value), param.value)
-
-  if (!success) {
-    alert(i18n.t("Ups, something happened"))
-  }
-
-  if (success) {
-    toast(i18n.t("Updated successfully"), {
-      autoClose: 1000,
+      if (!success) {
+        alert(i18n.t("Ups, something happened"))
+      }
     })
-  }
-}
+
+    const handleSubmit = async (e: Event) => {
+      e.preventDefault()
+      const { success } = await taskStore.dispatchUpdateTask(Boolean(newValue.value), param.value)
+
+      if (!success) {
+        alert(i18n.t("Ups, something happened"))
+      }
+
+      if (success) {
+        toast(i18n.t("Updated successfully"), {
+          autoClose: 1000,
+        })
+      }
+    }
+
+    return {
+      changeStatus,
+      handleSubmit,
+      taskStore,
+    }
+  },
+})
 </script>
