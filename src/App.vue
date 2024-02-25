@@ -1,6 +1,7 @@
 <template>
   <div class="min-h-screen">
-    <sidebar />
+    <NavBar />
+    <Sidebar />
     <router-view></router-view>
   </div>
 </template>
@@ -16,4 +17,5 @@ body {
 </style>
 <script lang="ts" setup>
 import Sidebar from "./components/Sidebar.vue"
+import NavBar from "./components/NavBar.vue"
 </script>
