@@ -1,0 +1,20 @@
+{
+  "Todos": "Toutes les tâches",
+  "Completed": "Completer",
+  "Boards": "Planches",
+  "To do": "À faire",
+  "Add Todo": "Ajouter une tâche",
+  "Status": "Statut",
+  "Create a Todo": "Crée une tâche",
+  "Please select a status": "Veuillez sélectionner un statut",
+  "In progress": "En cours",
+  "Update task": "Tâche de mise à jour",
+  "Loading": "Chargement",
+  "Task Created successfully": "Tâche créée avec succès",
+  "Updated successfully": "Mis à jour avec succès",
+  "Ups, something happened": "Oups, il s'est passé quelque chose",
+  "Task Deleted successfully": "Tâche supprimée avec succès",
+  "Creating": "Création",
+  "Create": "Créer",
+  "Deleting": "Suppression"
+}
